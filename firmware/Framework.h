@@ -11,6 +11,7 @@
 #include <avr/io.h>
 
 USB_PIPE(ep_in, 0x81 | USB_EP_PP, USB_EP_TYPE_BULK_gc, 64, 8, PIPE_ENABLE_FLUSH);
+USB_PIPE(ep_out, 0x02 | USB_EP_PP, USB_EP_TYPE_BULK_gc, 64, 8, PIPE_ENABLE_FLUSH);
 
 bool timeout_or_sampling_no_longer_enabled = 0;
 
@@ -35,6 +36,7 @@ static inline void break_and_flush(){
 
 void EVENT_USB_Device_ConfigurationChanged(uint8_t config){
 	usb_pipe_init(&ep_in);
+	usb_pipe_init(&ep_out);
 }
 
 ISR(USB_BUSEVENT_vect){
@@ -54,5 +56,6 @@ ISR(USB_TRNCOMPL_vect){
 	USB.FIFOWP = 0;
 	USB.INTFLAGSBCLR = USB_SETUPIF_bm | USB_TRNIF_bm;
 	usb_pipe_handle(&ep_in);
+	usb_pipe_handle(&ep_out);
 	USB_Task();
 }

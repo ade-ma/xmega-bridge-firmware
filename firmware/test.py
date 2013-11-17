@@ -1,5 +1,6 @@
 import usb
 import iox32a4u as x
+import time
 
 dev = usb.core.find(idVendor=0x59e3, idProduct=0xf000)
 
@@ -16,12 +17,9 @@ def bigRead(addr):
 def smallRead(addr):
 	return dev.ctrl_transfer(0x40|0x80, 0x09, 0, addr, 1)[0]
 
-smallWrite(x.PORTE_DIRSET, x.PIN0_bm | x.PIN1_bm)
-smallWrite(x.TCE0_CTRLA, x.TC_CLKSEL_DIV1024_gc)
-smallWrite(x.TCE0_CTRLB, x.TC0_CCAEN_bm | x.TC0_CCBEN_bm | x.TC_WGMODE_SINGLESLOPE_gc)
-bigWrite(x.TCE0_CCA, 0x10)
-bigWrite(x.TCE0_CCB, 0x10)
-print bigRead(x.TCE0_CCA)
+#dev.set_configuration()
+testPattern = '\x55'*64
 
 while True:
-	print bigRead(x.TCE0_CNT)
+	dev.write(0x02, testPattern, 0, 100)
+	print dev.read(0x81, 64, 0, 100)
