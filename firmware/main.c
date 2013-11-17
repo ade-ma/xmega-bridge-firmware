@@ -52,7 +52,6 @@ int main(void){
 			DMA.CH0.TRFCNT = 64;
 			DMA.CH0.CTRLA |= DMA_CH_ENABLE_bm;
 			DMA.CH0.CTRLA |= DMA_CH_TRFREQ_bm;
-			usb_pipe_write_byte(&ep_in, 0x02);
 			uint8_t *DMADST = usb_pipe_write_ptr(&ep_in);
 			DMA.CH1.DESTADDR0 = ((uint32_t)(&DMADST) >> (8*0)) & 0xFF;
 			DMA.CH1.DESTADDR1 = ((uint32_t)(&DMADST) >> (8*1)) & 0xFF;
