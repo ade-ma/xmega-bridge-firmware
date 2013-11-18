@@ -17,8 +17,7 @@ def bigRead(addr):
 def smallRead(addr):
 	return dev.ctrl_transfer(0x40|0x80, 0x09, 0, addr, 1)[0]
 
-#dev.set_configuration()
-testPattern = (chr(0xf0)+chr(0xff))*32
+testPattern = (chr(0x0f)+chr(0xf0))*32
 
 for i in range(10):
 	dev.write(0x02, testPattern, 0, 100)
