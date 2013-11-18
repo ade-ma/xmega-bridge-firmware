@@ -55,7 +55,5 @@ ISR(USB_BUSEVENT_vect){
 ISR(USB_TRNCOMPL_vect){
 	USB.FIFOWP = 0;
 	USB.INTFLAGSBCLR = USB_SETUPIF_bm | USB_TRNIF_bm;
-	usb_pipe_handle(&ep_in);
-	usb_pipe_handle(&ep_out);
 	USB_Task();
 }

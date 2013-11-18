@@ -10,10 +10,10 @@ int main(void){
 
 	PORTE.DIRSET = (1 << 3) | (1 << 1) | (1 << 0);
 	PORTE.DIRCLR = (1 << 2);
-	USARTE0.CTRLC = 0b11000000;//USART_CMODE_MSPI_gc;
+	USARTE0.BAUDCTRLA = 0x07;
+	USARTE0.BAUDCTRLB = 0x00;
+	USARTE0.CTRLC = USART_CMODE_MSPI_gc;
 	USARTE0.CTRLB = USART_RXEN_bm | USART_TXEN_bm;
-	USARTE0.BAUDCTRLA = 0;
-	USARTE0.BAUDCTRLB = 1;
 	DMA.CTRL = DMA_ENABLE_bm | DMA_DBUFMODE_DISABLED_gc | DMA_PRIMODE_RR0123_gc;
 
 	// BUFFER -> .DATA
@@ -54,7 +54,10 @@ int main(void){
 			DMA.CH1.CTRLA |= DMA_CH_ENABLE_bm;
 			running = 1;
 		}
-
+		else {
+			usb_pipe_handle(&ep_in);
+			usb_pipe_handle(&ep_out);
+		}
 	}
 }
 

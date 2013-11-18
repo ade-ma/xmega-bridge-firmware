@@ -20,6 +20,6 @@ def smallRead(addr):
 #dev.set_configuration()
 testPattern = (chr(0xf0)+chr(0xff))*32
 
-while True:
+for i in range(10):
 	dev.write(0x02, testPattern, 0, 100)
-	print dev.read(0x81, 64, 0, 100)
+	dev.read(0x81, 64, 0, 100)
