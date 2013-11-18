@@ -116,7 +116,7 @@ const USB_Descriptor_Configuration_t PROGMEM XmegaExample_ConfigurationDescripto
 
 			.EndpointAddress        = (ENDPOINT_DESCRIPTOR_DIR_OUT | 2),
 			.Attributes             = (EP_TYPE_BULK | ENDPOINT_ATTR_NO_SYNC | ENDPOINT_USAGE_DATA),
-			.EndpointSize           = 32,
+			.EndpointSize           = 64,
 			.PollingIntervalMS      = 0x00
 		},
 };

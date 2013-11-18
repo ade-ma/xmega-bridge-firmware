@@ -32,7 +32,7 @@ static inline void break_and_flush(){
             return;
         }
     }
-} 
+}
 
 void EVENT_USB_Device_ConfigurationChanged(uint8_t config){
 	usb_pipe_init(&ep_in);
