@@ -17,8 +17,9 @@ def bigRead(addr):
 def smallRead(addr):
 	return dev.ctrl_transfer(0x40|0x80, 0x09, 0, addr, 1)[0]
 
-testPattern = (chr(0x0f)+chr(0xf0))*32
+toOut = lambda x: chr(0xff^x)
+toPacket = lambda x: (toOut(x))*64
 
-for i in range(10):
-	dev.write(0x02, testPattern, 0, 100)
+for i in range(2):
+	dev.write(0x02, toPacket(i), 0, 100)
 	dev.read(0x81, 64, 0, 100)
