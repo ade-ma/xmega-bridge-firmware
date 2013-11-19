@@ -67,7 +67,7 @@ int main(void){
 			usb_pipe_can_write(&ep_in)) &&
 			aDone &&
 			((DMA.STATUS & (DMA_CH0BUSY_bm|DMA_CH2BUSY_bm)) == 0x00)) {
-			PORTE.OUTTGL = 1;
+			DMA.INTFLAGS = 0xff;
 			if ( aRunning ) {
 				usb_pipe_done_read(&ep_out);
 				usb_pipe_done_write(&ep_in);
@@ -86,17 +86,12 @@ int main(void){
 			DMA.CH2.TRFCNT = 64;
 			DMA.CH0.CTRLA |= DMA_CH_ENABLE_bm;
 			DMA.CH2.CTRLA |= DMA_CH_ENABLE_bm;
-			PORTE.OUTTGL = 1;
 			aDone = 0;
 		}
 		if ((usb_pipe_can_read(&ep_out) &&
 			usb_pipe_can_write(&ep_in)) &&
 			bDone  &&
 			((DMA.STATUS & (DMA_CH1BUSY_bm|DMA_CH3BUSY_bm)) == 0x00)) {
-			PORTE.OUTTGL = 1;
-			_delay_us(1);
-			PORTE.OUTTGL = 1;
-			_delay_us(1);
 			PORTE.OUTTGL = 1;
 			if ( bRunning ) {
 				usb_pipe_done_read(&ep_out);
@@ -114,11 +109,6 @@ int main(void){
 			DMA.CH3.DESTADDR1 = (((uint16_t)(DMADST)) >> 8) & 0xFF;
 			DMA.CH3.DESTADDR2 = 0x00;
 			DMA.CH3.TRFCNT = 64;
-			_delay_us(10);
-			PORTE.OUTTGL = 1;
-			_delay_us(1);
-			PORTE.OUTTGL = 1;
-			_delay_us(1);
 			PORTE.OUTTGL = 1;
 			bDone = 0;
 		}
