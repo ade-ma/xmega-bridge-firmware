@@ -10,8 +10,8 @@
 #include <avr/eeprom.h>
 #include <avr/io.h>
 
-USB_PIPE(ep_in, 0x81 | USB_EP_PP, USB_EP_TYPE_BULK_gc, 64, 8, PIPE_ENABLE_FLUSH);
-USB_PIPE(ep_out, 0x02 | USB_EP_PP, USB_EP_TYPE_BULK_gc, 64, 8, PIPE_ENABLE_FLUSH);
+USB_PIPE(ep_in, 0x81 | USB_EP_PP, USB_EP_TYPE_BULK_gc, 64, 4, PIPE_ENABLE_FLUSH);
+USB_PIPE(ep_out, 0x02 | USB_EP_PP, USB_EP_TYPE_BULK_gc, 64, 4, PIPE_ENABLE_FLUSH);
 
 bool timeout_or_sampling_no_longer_enabled = 0;
 
