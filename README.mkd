@@ -1,7 +1,5 @@
-This project exists to act as a framework for creating basic USB-capable firmware for the xmega32a4u using the awesome [USB-XMEGA](https://github.com/nonolith/USB-XMEGA) stack by [Kevin Mehall](https://github.com/kevinmehall).
+This project builds off of the [xmega-firmware-framework](https://github.com/nonolith/xmega-firmware-framework) to add full duplex 1msps direct digital IO functionality via DMA and a universal synchronous transmitter / receiver periperal.
 
-I was tired of copying the same half-dozen files every time I worked on a new project, so I created this repository to act as a template for making stuff happen. 
+It is currently used in conjunction with a naive 434MHz oscillator / transmitter to enable [LibOut](https://github.com/ade-ma/LibOut) to control outlets remotely.
 
-To use this project, you will need to modify ".VendorID" and ".ProductID" on lines 56 and 57 of Descriptors.h to match your end device. This change will also need to be reflected in the makefile definition of "make update."
-
-Additionally, to accurately reflect the branding of your hardware, you will need to modify all instances of "USB_Descriptor_String_t" in Descriptors.h.
+It may be fleshed out to include abstractions for well-structured digital communication protocols such as I2C and SPI.
